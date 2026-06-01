@@ -116,12 +116,7 @@ export default function AdminPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Link href="/" className="flex items-center gap-3">
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-                  style={{ background: 'linear-gradient(135deg, #4DA3FF 0%, #0070F4 50%, #001E36 100%)' }}
-                >
-                  <span className="text-white text-xl font-bold">D</span>
-                </div>
+                <img src="/icon-192.png" alt="Dannion Creative Hub Logo" className="w-10 h-10 rounded-xl object-contain shadow-md" />
                 <div>
                   <h1 className="text-gray-800 font-bold text-lg leading-tight">Dannion DP Generator</h1>
                   <p className="text-gray-500 text-xs">Admin Dashboard</p>

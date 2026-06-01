@@ -8,13 +8,12 @@ export default function AdsSection() {
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           {/* Logo and Branding */}
           <div className="flex-shrink-0 text-center lg:text-left">
-            <div 
-              className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto lg:mx-0 mb-4 shadow-lg"
-              style={{ background: 'linear-gradient(135deg, #4DA3FF 0%, #0070F4 50%, #001E36 100%)' }}
-            >
-              <span className="text-white text-3xl font-bold">D</span>
-            </div>
-            <h3 className="text-gray-800 font-bold text-xl">Dannion Creative Hub</h3>
+            <img
+              src="/icon-192.png"
+              alt="Dannion Creative Hub Logo"
+              className="w-20 h-20 rounded-2xl object-contain mx-auto lg:mx-0 shadow-lg"
+            />
+            <h3 className="text-gray-800 font-bold text-xl mt-4">Dannion Creative Hub</h3>
             <p className="text-gray-500 text-sm">Digital Solutions Agency</p>
           </div>
 
