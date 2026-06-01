@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { GA_MEASUREMENT_ID } from '@/lib/analytics';
 
 export const metadata: Metadata = {
   title: 'Dannion DP Generator | Create Stunning Profile Pictures',
@@ -53,6 +54,21 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#D4AF37" />
         <meta name="msapplication-tap-highlight" content="no" />
+        
+        {/* Google Analytics 4 */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { DesignConfig } from '@/lib/designs';
 import { compositeDP } from '@/lib/compositor';
+import { trackDpGenerated } from '@/lib/analytics';
 
 interface PreviewSectionProps {
   userImageSrc: string;
@@ -44,7 +45,17 @@ export default function PreviewSection({ userImageSrc, selectedDesign, userName,
 
   const handleDownload = () => {
     if (!previewUrl) return;
-    
+
+    // Track the dp_generated event before download
+    if (selectedDesign) {
+      trackDpGenerated({
+        designId: selectedDesign.id,
+        designName: selectedDesign.name,
+        hasBgRemoved: removeBackground,
+        userName: userName.trim(),
+      });
+    }
+
     const link = document.createElement('a');
     link.href = previewUrl;
     link.download = `dannion-dp-${Date.now()}.png`;

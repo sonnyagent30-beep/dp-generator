@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { trackBgToggle } from '@/lib/analytics';
 
 interface BgRemoverToggleProps {
   onToggle: (remove: boolean) => void;
@@ -14,6 +15,7 @@ export default function BgRemoverToggle({ onToggle, isProcessing }: BgRemoverTog
     const newValue = !enabled;
     setEnabled(newValue);
     onToggle(newValue);
+    trackBgToggle(newValue ? 'enabled' : 'disabled');
   };
 
   return (

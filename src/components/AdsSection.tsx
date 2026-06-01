@@ -108,6 +108,13 @@ export default function AdsSection() {
         <p className="text-center text-gray-400 text-sm mt-8">
           © {new Date().getFullYear()} Dannion Creative Hub. All rights reserved.
         </p>
+        
+        {/* Privacy Policy Link */}
+        <p className="text-center mt-4">
+          <a href="/privacy" className="text-gray-400 hover:text-[#D4AF37] text-sm transition-colors">
+            Privacy Policy
+          </a>
+        </p>
       </div>
     </section>
   );

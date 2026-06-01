@@ -1,6 +1,7 @@
 'use client';
 
 import { designs, DesignConfig } from '@/lib/designs';
+import { trackDesignSelected } from '@/lib/analytics';
 
 interface DesignGalleryProps {
   selectedDesign: string | null;
@@ -8,12 +9,16 @@ interface DesignGalleryProps {
 }
 
 export default function DesignGallery({ selectedDesign, onSelectDesign }: DesignGalleryProps) {
+  const handleDesignClick = (design: DesignConfig) => {
+    trackDesignSelected(design.id, design.name);
+    onSelectDesign(design);
+  };
   return (
     <div className="grid grid-cols-2 gap-4 sm:gap-6 w-full max-w-2xl mx-auto">
       {designs.map((design, index) => (
         <button
           key={design.id}
-          onClick={() => onSelectDesign(design)}
+          onClick={() => handleDesignClick(design)}
           className={`relative bg-white rounded-2xl p-4 sm:p-5 border-2 transition-all duration-300 text-left group hover:shadow-xl ${
             selectedDesign === design.id
               ? 'border-[#D4AF37] shadow-lg scale-[1.02]'
