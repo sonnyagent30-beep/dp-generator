@@ -19,7 +19,7 @@ export function trackEvent(eventName: string, params?: Record<string, unknown>):
 export function trackDpGenerated(data: {
   designId: string;
   designName: string;
-  hasBgRemoved: boolean;
+  hasBgRemoved?: boolean;
   userName?: string;
 }): void {
   trackEvent('dp_generated', {

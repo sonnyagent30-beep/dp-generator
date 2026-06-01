@@ -9,10 +9,9 @@ interface PreviewSectionProps {
   userImageSrc: string;
   selectedDesign: DesignConfig | null;
   userName: string;
-  removeBackground: boolean;
 }
 
-export default function PreviewSection({ userImageSrc, selectedDesign, userName, removeBackground }: PreviewSectionProps) {
+export default function PreviewSection({ userImageSrc, selectedDesign, userName }: PreviewSectionProps) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -41,7 +40,7 @@ export default function PreviewSection({ userImageSrc, selectedDesign, userName,
 
     const timeout = setTimeout(generatePreview, 300);
     return () => clearTimeout(timeout);
-  }, [userImageSrc, selectedDesign, userName, removeBackground]);
+  }, [userImageSrc, selectedDesign, userName]);
 
   const handleDownload = () => {
     if (!previewUrl) return;
@@ -51,7 +50,6 @@ export default function PreviewSection({ userImageSrc, selectedDesign, userName,
       trackDpGenerated({
         designId: selectedDesign.id,
         designName: selectedDesign.name,
-        hasBgRemoved: removeBackground,
         userName: userName.trim(),
       });
     }

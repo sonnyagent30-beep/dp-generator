@@ -3,65 +3,26 @@
 import { useState, useCallback } from 'react';
 import StepIndicator from '@/components/StepIndicator';
 import UploadSection from '@/components/UploadSection';
-import BgRemoverToggle from '@/components/BgRemoverToggle';
 import DesignGallery from '@/components/DesignGallery';
 import NameInput from '@/components/NameInput';
 import PreviewSection from '@/components/PreviewSection';
 import AdsSection from '@/components/AdsSection';
 import { DesignConfig } from '@/lib/designs';
-import { removeBackground } from '@/lib/remove-bg';
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [userImageSrc, setUserImageSrc] = useState<string | null>(null);
-  const [originalImageSrc, setOriginalImageSrc] = useState<string | null>(null);
-  const [removeBgEnabled, setRemoveBgEnabled] = useState(false);
-  const [isRemovingBg, setIsRemovingBg] = useState(false);
   const [selectedDesign, setSelectedDesign] = useState<DesignConfig | null>(null);
   const [userName, setUserName] = useState('');
 
   const handleImageUpload = useCallback((file: File, dataUrl: string) => {
-    setOriginalImageSrc(dataUrl);
     setUserImageSrc(dataUrl);
     setCurrentStep(2);
   }, []);
 
-  const handleBgRemoveToggle = useCallback(async (enabled: boolean) => {
-    setRemoveBgEnabled(enabled);
-    
-    if (!enabled) {
-      setUserImageSrc(originalImageSrc);
-      return;
-    }
-
-    if (!originalImageSrc) return;
-
-    setIsRemovingBg(true);
-    try {
-      const response = await fetch(originalImageSrc);
-      const blob = await response.blob();
-      const file = new File([blob], 'image.png', { type: 'image/png' });
-
-      const result = await removeBackground(file);
-      
-      if (result.success && result.data) {
-        setUserImageSrc(result.data);
-      } else {
-        alert(result.error || 'Failed to remove background');
-        setRemoveBgEnabled(false);
-      }
-    } catch (error) {
-      console.error('Background removal error:', error);
-      alert('Failed to remove background. Please try again.');
-      setRemoveBgEnabled(false);
-    } finally {
-      setIsRemovingBg(false);
-    }
-  }, [originalImageSrc]);
-
   const handleDesignSelect = useCallback((design: DesignConfig) => {
     setSelectedDesign(design);
-    setCurrentStep(4);
+    setCurrentStep(3);
   }, []);
 
   const handleNameChange = useCallback((name: string) => {
@@ -76,12 +37,12 @@ export default function Home() {
 
   return (
     <main className="min-h-screen" style={{ background: 'linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 50%, #FFFFFF 100%)' }}>
-      {/* Header - Clean and Professional */}
+      {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div 
+              <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
                 style={{ background: 'linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #B8960C 100%)' }}
               >
@@ -96,8 +57,8 @@ export default function Home() {
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100">
               <span className="text-gray-500 text-sm">Step</span>
               <span className="text-gray-800 font-bold">{currentStep}</span>
-              <span className="text-gray-400">/</span>
-              <span className="text-gray-500">5</span>
+              <span className="text-gray-500">/</span>
+              <span className="text-gray-500">4</span>
             </div>
           </div>
         </div>
@@ -105,7 +66,7 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Step Indicator - Modern Progress Bar */}
+        {/* Step Indicator */}
         <div className="mb-10">
           <StepIndicator currentStep={currentStep} />
         </div>
@@ -123,35 +84,8 @@ export default function Home() {
             </section>
           )}
 
-          {/* Step 2: Background Removal */}
+          {/* Step 2: Design Selection */}
           {currentStep === 2 && (
-            <section>
-              <div className="text-center mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Remove Background?</h2>
-                <p className="text-gray-500">Toggle to make your photo background transparent</p>
-              </div>
-              <div className="max-w-md mx-auto">
-                <BgRemoverToggle onToggle={handleBgRemoveToggle} isProcessing={isRemovingBg} />
-              </div>
-              <div className="flex flex-col sm:flex-row justify-center gap-3 mt-8">
-                <button
-                  onClick={handleBack}
-                  className="outline-btn"
-                >
-                  ← Back
-                </button>
-                <button
-                  onClick={() => setCurrentStep(3)}
-                  className="gold-btn"
-                >
-                  Continue to Designs →
-                </button>
-              </div>
-            </section>
-          )}
-
-          {/* Step 3: Design Selection */}
-          {currentStep === 3 && (
             <section>
               <div className="text-center mb-8">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Choose a Design</h2>
@@ -166,8 +100,8 @@ export default function Home() {
             </section>
           )}
 
-          {/* Step 4: Name Input */}
-          {currentStep === 4 && (
+          {/* Step 3: Name Input */}
+          {currentStep === 3 && (
             <section>
               <div className="text-center mb-8">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Add Your Name</h2>
@@ -181,7 +115,7 @@ export default function Home() {
                   ← Back
                 </button>
                 <button
-                  onClick={() => setCurrentStep(5)}
+                  onClick={() => setCurrentStep(4)}
                   disabled={!userName.trim()}
                   className={`gold-btn ${!userName.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
@@ -191,8 +125,8 @@ export default function Home() {
             </section>
           )}
 
-          {/* Step 5: Preview & Download */}
-          {currentStep === 5 && (
+          {/* Step 4: Preview & Download */}
+          {currentStep === 4 && (
             <section>
               <div className="text-center mb-8">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Your DP is Ready!</h2>
@@ -202,7 +136,6 @@ export default function Home() {
                 userImageSrc={userImageSrc!}
                 selectedDesign={selectedDesign}
                 userName={userName}
-                removeBackground={removeBgEnabled}
               />
               <div className="flex justify-center mt-8">
                 <button onClick={handleBack} className="outline-btn">
@@ -220,8 +153,6 @@ export default function Home() {
               onClick={() => {
                 setCurrentStep(1);
                 setUserImageSrc(null);
-                setOriginalImageSrc(null);
-                setRemoveBgEnabled(false);
                 setSelectedDesign(null);
                 setUserName('');
               }}
