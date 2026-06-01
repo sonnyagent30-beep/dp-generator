@@ -1,65 +1,241 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useCallback } from 'react';
+import StepIndicator from '@/components/StepIndicator';
+import UploadSection from '@/components/UploadSection';
+import BgRemoverToggle from '@/components/BgRemoverToggle';
+import DesignGallery from '@/components/DesignGallery';
+import NameInput from '@/components/NameInput';
+import PreviewSection from '@/components/PreviewSection';
+import AdsSection from '@/components/AdsSection';
+import { DesignConfig } from '@/lib/designs';
+import { removeBackground } from '@/lib/remove-bg';
 
 export default function Home() {
+  // State management
+  const [currentStep, setCurrentStep] = useState(1);
+  const [userImageSrc, setUserImageSrc] = useState<string | null>(null);
+  const [originalImageSrc, setOriginalImageSrc] = useState<string | null>(null);
+  const [removeBgEnabled, setRemoveBgEnabled] = useState(false);
+  const [isRemovingBg, setIsRemovingBg] = useState(false);
+  const [selectedDesign, setSelectedDesign] = useState<DesignConfig | null>(null);
+  const [userName, setUserName] = useState('');
+
+  const handleImageUpload = useCallback((file: File, dataUrl: string) => {
+    setOriginalImageSrc(dataUrl);
+    setUserImageSrc(dataUrl);
+    setCurrentStep(2);
+  }, []);
+
+  const handleBgRemoveToggle = useCallback(async (enabled: boolean) => {
+    setRemoveBgEnabled(enabled);
+    
+    if (!enabled) {
+      // Reset to original image
+      setUserImageSrc(originalImageSrc);
+      return;
+    }
+
+    if (!originalImageSrc) return;
+
+    setIsRemovingBg(true);
+    try {
+      // Convert base64 to File
+      const response = await fetch(originalImageSrc);
+      const blob = await response.blob();
+      const file = new File([blob], 'image.png', { type: 'image/png' });
+
+      const result = await removeBackground(file);
+      
+      if (result.success && result.data) {
+        setUserImageSrc(result.data);
+      } else {
+        alert(result.error || 'Failed to remove background');
+        setRemoveBgEnabled(false);
+      }
+    } catch (error) {
+      console.error('Background removal error:', error);
+      alert('Failed to remove background. Please try again.');
+      setRemoveBgEnabled(false);
+    } finally {
+      setIsRemovingBg(false);
+    }
+  }, [originalImageSrc]);
+
+  const handleDesignSelect = useCallback((design: DesignConfig) => {
+    setSelectedDesign(design);
+    setCurrentStep(4);
+  }, []);
+
+  const handleNameChange = useCallback((name: string) => {
+    setUserName(name);
+  }, []);
+
+  const canProceedToStep = (step: number) => {
+    switch (step) {
+      case 1:
+        return !!userImageSrc;
+      case 2:
+        return true; // Background removal is optional
+      case 3:
+        return !!selectedDesign;
+      case 4:
+        return userName.trim().length > 0;
+      default:
+        return false;
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-dark-100">
+      {/* Header */}
+      <header className="py-8 px-4 border-b border-dark-300">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-gold rounded-xl flex items-center justify-center">
+              <span className="text-dark text-2xl font-bold">D</span>
+            </div>
+            <div>
+              <h1 className="text-gold font-bold text-xl">Dannion DP Generator</h1>
+              <p className="text-gold-400 text-sm">Create stunning profile pictures</p>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {/* Step Indicator */}
+        <StepIndicator currentStep={currentStep} />
+
+        {/* Step Content */}
+        <div className="mt-12">
+          {/* Step 1: Upload */}
+          {currentStep === 1 && (
+            <section className="animate-fadeIn">
+              <h2 className="text-3xl font-bold text-white text-center mb-4">Upload Your Photo</h2>
+              <p className="text-gold-400 text-center mb-8">Choose a clear, high-quality photo for best results</p>
+              <UploadSection onImageUpload={handleImageUpload} />
+            </section>
+          )}
+
+          {/* Step 2: Background Removal */}
+          {currentStep === 2 && (
+            <section className="animate-fadeIn">
+              <h2 className="text-3xl font-bold text-white text-center mb-4">Remove Background?</h2>
+              <p className="text-gold-400 text-center mb-8">Toggle to make your photo background transparent</p>
+              <BgRemoverToggle onToggle={handleBgRemoveToggle} isProcessing={isRemovingBg} />
+              <div className="flex justify-center gap-4 mt-8">
+                <button
+                  onClick={handleBack}
+                  className="px-6 py-3 bg-dark-200 text-gold border border-gold-400 rounded-xl hover:bg-dark-300 transition-all duration-300"
+                >
+                  Back
+                </button>
+                <button
+                  onClick={() => setCurrentStep(3)}
+                  className="px-6 py-3 bg-gold text-dark font-bold rounded-xl hover:bg-gold-400 transition-all duration-300"
+                >
+                  Continue to Designs →
+                </button>
+              </div>
+            </section>
+          )}
+
+          {/* Step 3: Design Selection */}
+          {currentStep === 3 && (
+            <section className="animate-fadeIn">
+              <h2 className="text-3xl font-bold text-white text-center mb-4">Choose a Design</h2>
+              <p className="text-gold-400 text-center mb-8">Select a themed template for your profile picture</p>
+              <DesignGallery selectedDesign={selectedDesign?.id || null} onSelectDesign={handleDesignSelect} />
+              <div className="flex justify-center mt-8">
+                <button
+                  onClick={handleBack}
+                  className="px-6 py-3 bg-dark-200 text-gold border border-gold-400 rounded-xl hover:bg-dark-300 transition-all duration-300"
+                >
+                  ← Back
+                </button>
+              </div>
+            </section>
+          )}
+
+          {/* Step 4: Name Input */}
+          {currentStep === 4 && (
+            <section className="animate-fadeIn">
+              <h2 className="text-3xl font-bold text-white text-center mb-4">Add Your Name</h2>
+              <p className="text-gold-400 text-center mb-8">Your name will be displayed on the DP</p>
+              <NameInput onNameChange={handleNameChange} />
+              <div className="flex justify-center gap-4 mt-8">
+                <button
+                  onClick={handleBack}
+                  className="px-6 py-3 bg-dark-200 text-gold border border-gold-400 rounded-xl hover:bg-dark-300 transition-all duration-300"
+                >
+                  ← Back
+                </button>
+                <button
+                  onClick={() => setCurrentStep(5)}
+                  disabled={!userName.trim()}
+                  className={`px-6 py-3 bg-gold text-dark font-bold rounded-xl transition-all duration-300 ${
+                    userName.trim() ? 'hover:bg-gold-400' : 'opacity-50 cursor-not-allowed'
+                  }`}
+                >
+                  Generate Preview →
+                </button>
+              </div>
+            </section>
+          )}
+
+          {/* Step 5: Preview & Download */}
+          {currentStep === 5 && (
+            <section className="animate-fadeIn">
+              <h2 className="text-3xl font-bold text-white text-center mb-4">Your DP is Ready!</h2>
+              <p className="text-gold-400 text-center mb-8">Download your personalized display picture</p>
+              <PreviewSection
+                userImageSrc={userImageSrc!}
+                selectedDesign={selectedDesign}
+                userName={userName}
+                removeBackground={removeBgEnabled}
+              />
+              <div className="flex justify-center mt-8">
+                <button
+                  onClick={handleBack}
+                  className="px-6 py-3 bg-dark-200 text-gold border border-gold-400 rounded-xl hover:bg-dark-300 transition-all duration-300"
+                >
+                  ← Modify
+                </button>
+              </div>
+            </section>
+          )}
         </div>
-      </main>
-    </div>
+
+        {/* Start Over Button */}
+        {currentStep > 1 && (
+          <div className="text-center mt-12">
+            <button
+              onClick={() => {
+                setCurrentStep(1);
+                setUserImageSrc(null);
+                setOriginalImageSrc(null);
+                setRemoveBgEnabled(false);
+                setSelectedDesign(null);
+                setUserName('');
+              }}
+              className="text-gold-400 hover:text-gold transition-colors text-sm underline"
+            >
+              Start Over
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Ads Section */}
+      <AdsSection />
+    </main>
   );
 }
