@@ -24,10 +24,10 @@ export const designs: DesignConfig[] = [
   {
     id: 'anniversary-gold',
     name: 'Anniversary Gold',
-    description: 'Elegant gold frame for special occasions',
+    description: 'Elegant gold rose-themed frame for anniversaries',
     image: '/designs/anniversary-gold.png',
-    photoPosition: { x: 100, y: 100, width: 600, height: 500 },
-    namePosition: { x: 400, y: 680, fontSize: 36, color: '#FFD700' },
+    photoPosition: { x: 220, y: 220, width: 360, height: 360 },
+    namePosition: { x: 400, y: 710, fontSize: 24, color: '#B45478' },
   },
   {
     id: 'romantic-rose',

@@ -34,17 +34,36 @@ export async function compositeDP(options: CompositorOptions): Promise<string> {
       userImg.crossOrigin = 'anonymous';
 
       userImg.onload = () => {
-        // Draw user photo in the designated position
+        // Template already drawn. Now clip and draw user photo in the circular area
         const { x, y, width, height } = design.photoPosition;
-        
-        // Create circular clipping for the photo area (optional - makes it look like a profile pic)
+        const centerX = x + width / 2;
+        const centerY = y + height / 2;
+        const radius = Math.min(width, height) / 2;
+
         ctx.save();
+        // Create circular clip for the photo area
         ctx.beginPath();
-        ctx.roundRect(x, y, width, height, 20);
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
         ctx.clip();
-        
-        // Draw user image scaled to fit the photo area
-        ctx.drawImage(userImg, x, y, width, height);
+
+        // Draw user image - scale and center to fill the circle
+        const imgAspect = userImg.width / userImg.height;
+        const circleAspect = width / height;
+        let drawX, drawY, drawW, drawH;
+        if (imgAspect > circleAspect) {
+          // Image is wider - fit by height
+          drawH = height;
+          drawW = userImg.width * (height / userImg.height);
+          drawX = centerX - drawW / 2;
+          drawY = y;
+        } else {
+          // Image is taller - fit by width
+          drawW = width;
+          drawH = userImg.height * (width / userImg.width);
+          drawX = x;
+          drawY = centerY - drawH / 2;
+        }
+        ctx.drawImage(userImg, drawX, drawY, drawW, drawH);
         ctx.restore();
 
         // Draw name text
