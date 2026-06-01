@@ -7,10 +7,9 @@ interface Step {
 
 const steps: Step[] = [
   { id: 1, label: 'Upload' },
-  { id: 2, label: 'Background' },
-  { id: 3, label: 'Design' },
-  { id: 4, label: 'Name' },
-  { id: 5, label: 'Download' },
+  { id: 2, label: 'Design' },
+  { id: 3, label: 'Name' },
+  { id: 4, label: 'Download' },
 ];
 
 export default function StepIndicator({ currentStep }: { currentStep: number }) {
