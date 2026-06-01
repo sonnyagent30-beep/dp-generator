@@ -1,7 +1,7 @@
 // Google Analytics 4 Configuration
 // Replace with your actual GA4 Measurement ID
 
-export const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+export const GA_MEASUREMENT_ID = 'G-9TLYQ0R185';
 export const GA_API_SECRET = 'your-api-secret'; // Optional: for server-side validation
 
 /**
