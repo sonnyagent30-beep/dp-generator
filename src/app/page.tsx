@@ -12,7 +12,6 @@ import { DesignConfig } from '@/lib/designs';
 import { removeBackground } from '@/lib/remove-bg';
 
 export default function Home() {
-  // State management
   const [currentStep, setCurrentStep] = useState(1);
   const [userImageSrc, setUserImageSrc] = useState<string | null>(null);
   const [originalImageSrc, setOriginalImageSrc] = useState<string | null>(null);
@@ -31,7 +30,6 @@ export default function Home() {
     setRemoveBgEnabled(enabled);
     
     if (!enabled) {
-      // Reset to original image
       setUserImageSrc(originalImageSrc);
       return;
     }
@@ -40,7 +38,6 @@ export default function Home() {
 
     setIsRemovingBg(true);
     try {
-      // Convert base64 to File
       const response = await fetch(originalImageSrc);
       const blob = await response.blob();
       const file = new File([blob], 'image.png', { type: 'image/png' });
@@ -71,21 +68,6 @@ export default function Home() {
     setUserName(name);
   }, []);
 
-  const canProceedToStep = (step: number) => {
-    switch (step) {
-      case 1:
-        return !!userImageSrc;
-      case 2:
-        return true; // Background removal is optional
-      case 3:
-        return !!selectedDesign;
-      case 4:
-        return userName.trim().length > 0;
-      default:
-        return false;
-    }
-  };
-
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
@@ -93,54 +75,74 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-dark-100">
-      {/* Header */}
-      <header className="py-8 px-4 border-b border-dark-300">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gold rounded-xl flex items-center justify-center">
-              <span className="text-dark text-2xl font-bold">D</span>
+    <main className="min-h-screen" style={{ background: 'linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 50%, #FFFFFF 100%)' }}>
+      {/* Header - Clean and Professional */}
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div 
+                className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
+                style={{ background: 'linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #B8960C 100%)' }}
+              >
+                <span className="text-white text-xl font-bold">D</span>
+              </div>
+              <div>
+                <h1 className="text-gray-800 font-bold text-lg leading-tight">Dannion DP Generator</h1>
+                <p className="text-gray-500 text-xs">Create stunning profile pictures</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-gold font-bold text-xl">Dannion DP Generator</h1>
-              <p className="text-gold-400 text-sm">Create stunning profile pictures</p>
+            {/* Step Counter Badge */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100">
+              <span className="text-gray-500 text-sm">Step</span>
+              <span className="text-gray-800 font-bold">{currentStep}</span>
+              <span className="text-gray-400">/</span>
+              <span className="text-gray-500">5</span>
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        {/* Step Indicator */}
-        <StepIndicator currentStep={currentStep} />
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Step Indicator - Modern Progress Bar */}
+        <div className="mb-10">
+          <StepIndicator currentStep={currentStep} />
+        </div>
 
         {/* Step Content */}
-        <div className="mt-12">
+        <div className="animate-fadeInUp">
           {/* Step 1: Upload */}
           {currentStep === 1 && (
-            <section className="animate-fadeIn">
-              <h2 className="text-3xl font-bold text-white text-center mb-4">Upload Your Photo</h2>
-              <p className="text-gold-400 text-center mb-8">Choose a clear, high-quality photo for best results</p>
+            <section>
+              <div className="text-center mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Upload Your Photo</h2>
+                <p className="text-gray-500">Choose a clear, high-quality photo for best results</p>
+              </div>
               <UploadSection onImageUpload={handleImageUpload} />
             </section>
           )}
 
           {/* Step 2: Background Removal */}
           {currentStep === 2 && (
-            <section className="animate-fadeIn">
-              <h2 className="text-3xl font-bold text-white text-center mb-4">Remove Background?</h2>
-              <p className="text-gold-400 text-center mb-8">Toggle to make your photo background transparent</p>
-              <BgRemoverToggle onToggle={handleBgRemoveToggle} isProcessing={isRemovingBg} />
-              <div className="flex justify-center gap-4 mt-8">
+            <section>
+              <div className="text-center mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Remove Background?</h2>
+                <p className="text-gray-500">Toggle to make your photo background transparent</p>
+              </div>
+              <div className="max-w-md mx-auto">
+                <BgRemoverToggle onToggle={handleBgRemoveToggle} isProcessing={isRemovingBg} />
+              </div>
+              <div className="flex flex-col sm:flex-row justify-center gap-3 mt-8">
                 <button
                   onClick={handleBack}
-                  className="px-6 py-3 bg-dark-200 text-gold border border-gold-400 rounded-xl hover:bg-dark-300 transition-all duration-300"
+                  className="outline-btn"
                 >
-                  Back
+                  ← Back
                 </button>
                 <button
                   onClick={() => setCurrentStep(3)}
-                  className="px-6 py-3 bg-gold text-dark font-bold rounded-xl hover:bg-gold-400 transition-all duration-300"
+                  className="gold-btn"
                 >
                   Continue to Designs →
                 </button>
@@ -150,15 +152,14 @@ export default function Home() {
 
           {/* Step 3: Design Selection */}
           {currentStep === 3 && (
-            <section className="animate-fadeIn">
-              <h2 className="text-3xl font-bold text-white text-center mb-4">Choose a Design</h2>
-              <p className="text-gold-400 text-center mb-8">Select a themed template for your profile picture</p>
+            <section>
+              <div className="text-center mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Choose a Design</h2>
+                <p className="text-gray-500">Select a themed template for your profile picture</p>
+              </div>
               <DesignGallery selectedDesign={selectedDesign?.id || null} onSelectDesign={handleDesignSelect} />
               <div className="flex justify-center mt-8">
-                <button
-                  onClick={handleBack}
-                  className="px-6 py-3 bg-dark-200 text-gold border border-gold-400 rounded-xl hover:bg-dark-300 transition-all duration-300"
-                >
+                <button onClick={handleBack} className="outline-btn">
                   ← Back
                 </button>
               </div>
@@ -167,23 +168,22 @@ export default function Home() {
 
           {/* Step 4: Name Input */}
           {currentStep === 4 && (
-            <section className="animate-fadeIn">
-              <h2 className="text-3xl font-bold text-white text-center mb-4">Add Your Name</h2>
-              <p className="text-gold-400 text-center mb-8">Your name will be displayed on the DP</p>
-              <NameInput onNameChange={handleNameChange} />
-              <div className="flex justify-center gap-4 mt-8">
-                <button
-                  onClick={handleBack}
-                  className="px-6 py-3 bg-dark-200 text-gold border border-gold-400 rounded-xl hover:bg-dark-300 transition-all duration-300"
-                >
+            <section>
+              <div className="text-center mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Add Your Name</h2>
+                <p className="text-gray-500">Your name will be beautifully displayed on the DP</p>
+              </div>
+              <div className="max-w-md mx-auto">
+                <NameInput onNameChange={handleNameChange} />
+              </div>
+              <div className="flex flex-col sm:flex-row justify-center gap-3 mt-8">
+                <button onClick={handleBack} className="outline-btn">
                   ← Back
                 </button>
                 <button
                   onClick={() => setCurrentStep(5)}
                   disabled={!userName.trim()}
-                  className={`px-6 py-3 bg-gold text-dark font-bold rounded-xl transition-all duration-300 ${
-                    userName.trim() ? 'hover:bg-gold-400' : 'opacity-50 cursor-not-allowed'
-                  }`}
+                  className={`gold-btn ${!userName.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   Generate Preview →
                 </button>
@@ -193,9 +193,11 @@ export default function Home() {
 
           {/* Step 5: Preview & Download */}
           {currentStep === 5 && (
-            <section className="animate-fadeIn">
-              <h2 className="text-3xl font-bold text-white text-center mb-4">Your DP is Ready!</h2>
-              <p className="text-gold-400 text-center mb-8">Download your personalized display picture</p>
+            <section>
+              <div className="text-center mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Your DP is Ready!</h2>
+                <p className="text-gray-500">Download your personalized display picture</p>
+              </div>
               <PreviewSection
                 userImageSrc={userImageSrc!}
                 selectedDesign={selectedDesign}
@@ -203,10 +205,7 @@ export default function Home() {
                 removeBackground={removeBgEnabled}
               />
               <div className="flex justify-center mt-8">
-                <button
-                  onClick={handleBack}
-                  className="px-6 py-3 bg-dark-200 text-gold border border-gold-400 rounded-xl hover:bg-dark-300 transition-all duration-300"
-                >
+                <button onClick={handleBack} className="outline-btn">
                   ← Modify
                 </button>
               </div>
@@ -216,7 +215,7 @@ export default function Home() {
 
         {/* Start Over Button */}
         {currentStep > 1 && (
-          <div className="text-center mt-12">
+          <div className="text-center mt-10 pt-6 border-t border-gray-200">
             <button
               onClick={() => {
                 setCurrentStep(1);
@@ -226,7 +225,7 @@ export default function Home() {
                 setSelectedDesign(null);
                 setUserName('');
               }}
-              className="text-gold-400 hover:text-gold transition-colors text-sm underline"
+              className="text-gray-500 hover:text-gray-700 transition-colors text-sm underline underline-offset-4"
             >
               Start Over
             </button>
@@ -234,7 +233,7 @@ export default function Home() {
         )}
       </div>
 
-      {/* Ads Section */}
+      {/* Ads Section - Dannion Creative Hub */}
       <AdsSection />
     </main>
   );

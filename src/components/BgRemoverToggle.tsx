@@ -17,37 +17,61 @@ export default function BgRemoverToggle({ onToggle, isProcessing }: BgRemoverTog
   };
 
   return (
-    <div className="bg-dark-100 rounded-2xl p-6 w-full max-w-md mx-auto border border-dark-200">
+    <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className={`w-12 h-12 rounded-full flex items-center justify-center ${enabled ? 'bg-gold' : 'bg-dark-200'}`}>
-            <svg className={`w-6 h-6 ${enabled ? 'text-dark' : 'text-gold-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        {/* Icon */}
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
+          enabled 
+            ? 'bg-gradient-to-br from-[#E5C158] to-[#D4AF37] shadow-md' 
+            : 'bg-gray-100'
+        }`}>
+          {enabled ? (
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-          </div>
-          <div>
-            <h3 className="text-white font-semibold">Remove Background</h3>
-            <p className="text-gold-400 text-sm">Make your photo transparent</p>
-          </div>
+          ) : (
+            <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          )}
         </div>
+
+        {/* Text */}
+        <div className="flex-1 mx-4">
+          <h3 className="text-gray-800 font-semibold text-base">Remove Background</h3>
+          <p className="text-gray-500 text-sm">Make your photo transparent</p>
+        </div>
+
+        {/* Toggle Switch */}
         <button
           onClick={handleToggle}
           disabled={isProcessing}
-          className={`relative w-16 h-8 rounded-full transition-all duration-300 ${
-            enabled ? 'bg-gold' : 'bg-dark-200'
-          } ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`relative w-14 h-8 rounded-full transition-all duration-300 ${
+            enabled 
+              ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158]' 
+              : 'bg-gray-200'
+          } ${isProcessing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
+          aria-label="Toggle background removal"
         >
           <div
-            className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-lg transition-all duration-300 ${
-              enabled ? 'left-9' : 'left-1'
+            className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-all duration-300 flex items-center justify-center ${
+              enabled ? 'left-7' : 'left-1'
             }`}
-          />
+          >
+            <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+              enabled ? 'bg-[#D4AF37]' : 'bg-gray-400'
+            }`} />
+          </div>
         </button>
       </div>
+
+      {/* Processing State */}
       {isProcessing && (
-        <div className="mt-4 flex items-center gap-3 text-gold">
-          <div className="animate-spin w-5 h-5 border-2 border-gold border-t-transparent rounded-full" />
-          <span className="text-sm">Processing background removal...</span>
+        <div className="mt-5 pt-5 border-t border-gray-100 flex items-center gap-3">
+          <div 
+            className="w-5 h-5 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin"
+          />
+          <span className="text-[#D4AF37] text-sm font-medium">Processing background removal...</span>
         </div>
       )}
     </div>
