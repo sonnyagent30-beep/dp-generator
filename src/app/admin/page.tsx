@@ -118,7 +118,7 @@ export default function AdminPage() {
               <Link href="/" className="flex items-center gap-3">
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-                  style={{ background: 'linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #B8960C 100%)' }}
+                  style={{ background: 'linear-gradient(135deg, #4DA3FF 0%, #0070F4 50%, #001E36 100%)' }}
                 >
                   <span className="text-white text-xl font-bold">D</span>
                 </div>
@@ -146,7 +146,7 @@ export default function AdminPage() {
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Template Management</h2>
             <p className="text-gray-500 mt-1">Manage your DP design templates</p>
           </div>
-          <button onClick={handleAddNew} className="gold-btn">
+          <button onClick={handleAddNew} className="primary-btn">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
@@ -184,7 +184,7 @@ export default function AdminPage() {
             </div>
             <h3 className="text-gray-800 font-semibold text-lg mb-1">No Templates Yet</h3>
             <p className="text-gray-500 mb-4">Create your first design template to get started</p>
-            <button onClick={handleAddNew} className="gold-btn">
+            <button onClick={handleAddNew} className="primary-btn">
               Create First Template
             </button>
           </div>
@@ -195,7 +195,7 @@ export default function AdminPage() {
             {templates.map((template) => (
               <div 
                 key={template.id}
-                className="bg-white rounded-2xl p-5 border border-gray-200 hover:border-[#D4AF37]/50 hover:shadow-lg transition-all duration-300"
+                className="bg-white rounded-2xl p-5 border border-gray-200 hover:border-[#0070F4]/50 hover:shadow-lg transition-all duration-300"
               >
                 {/* Thumbnail Preview */}
                 <div 

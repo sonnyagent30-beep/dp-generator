@@ -16,7 +16,7 @@ export default function PrivacyPage() {
             <Link href="/" className="flex items-center gap-3">
               <div 
                 className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-                style={{ background: 'linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #B8960C 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #4DA3FF 0%, #0070F4 50%, #001E36 100%)' }}
               >
                 <span className="text-white text-xl font-bold">D</span>
               </div>
@@ -86,7 +86,7 @@ export default function PrivacyPage() {
                     href="https://policies.google.com/privacy" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-[#D4AF37] hover:underline"
+                    className="text-[#0070F4] hover:underline"
                   >
                     Privacy Policy
                   </a>
@@ -140,7 +140,7 @@ export default function PrivacyPage() {
           <div className="mt-10 pt-6 border-t border-gray-200">
             <Link 
               href="/"
-              className="inline-flex items-center gap-2 text-[#D4AF37] hover:text-[#B8960C] font-medium transition-colors"
+              className="inline-flex items-center gap-2 text-[#0070F4] hover:text-[#001E36] font-medium transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

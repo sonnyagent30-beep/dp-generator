@@ -87,12 +87,12 @@ export default function PreviewSection({ userImageSrc, selectedDesign, userName 
   return (
     <div className="w-full flex flex-col items-center">
       {/* Preview Card */}
-      <div className="bg-white rounded-2xl p-5 sm:p-6 border-2 border-[#D4AF37]/30 shadow-xl w-full max-w-sm sm:max-w-md">
+      <div className="bg-white rounded-2xl p-5 sm:p-6 border-2 border-[#0070F4]/30 shadow-xl w-full max-w-sm sm:max-w-md">
         <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl aspect-square overflow-hidden flex items-center justify-center">
           {isGenerating ? (
             <div className="flex flex-col items-center">
-              <div className="w-14 h-14 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin mb-4" />
-              <p className="text-[#D4AF37] font-medium">Generating preview...</p>
+              <div className="w-14 h-14 border-4 border-[#0070F4] border-t-transparent rounded-full animate-spin mb-4" />
+              <p className="text-[#0070F4] font-medium">Generating preview...</p>
             </div>
           ) : previewUrl ? (
             <img src={previewUrl} alt="DP Preview" className="w-full h-full object-contain" />
@@ -109,7 +109,7 @@ export default function PreviewSection({ userImageSrc, selectedDesign, userName 
       <button
         onClick={handleDownload}
         disabled={!previewUrl || isGenerating}
-        className={`mt-6 px-8 py-4 gold-btn shadow-lg ${
+        className={`mt-6 px-8 py-4 primary-btn shadow-lg ${
           previewUrl && !isGenerating ? 'hover:scale-105' : 'opacity-50 cursor-not-allowed'
         }`}
       >

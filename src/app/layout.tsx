@@ -30,7 +30,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: '#D4AF37',
+  themeColor: '#0070F4',
 };
 
 export default function RootLayout({
@@ -52,7 +52,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="DP Generator" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#D4AF37" />
+        <meta name="msapplication-TileColor" content="#0070F4" />
         <meta name="msapplication-tap-highlight" content="no" />
         
         {/* Google Analytics 4 */}

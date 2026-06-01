@@ -44,7 +44,7 @@ export default function Home() {
             <div className="flex items-center gap-3">
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-                style={{ background: 'linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #B8960C 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #4DA3FF 0%, #0070F4 50%, #001E36 100%)' }}
               >
                 <span className="text-white text-xl font-bold">D</span>
               </div>
@@ -117,7 +117,7 @@ export default function Home() {
                 <button
                   onClick={() => setCurrentStep(4)}
                   disabled={!userName.trim()}
-                  className={`gold-btn ${!userName.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`primary-btn ${!userName.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   Generate Preview →
                 </button>

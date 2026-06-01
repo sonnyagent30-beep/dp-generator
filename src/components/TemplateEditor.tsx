@@ -62,7 +62,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
               name="name"
               defaultValue={template?.name}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#D4AF37] focus:border-[#D4AF37] outline-none transition-all"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#0070F4] focus:border-[#0070F4] outline-none transition-all"
               placeholder="e.g., Anniversary Gold"
             />
           </div>
@@ -78,7 +78,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
               defaultValue={template?.description}
               required
               rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#D4AF37] focus:border-[#D4AF37] outline-none transition-all resize-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#0070F4] focus:border-[#0070F4] outline-none transition-all resize-none"
               placeholder="Brief description of this template"
             />
           </div>
@@ -94,7 +94,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
               name="image"
               defaultValue={template?.image}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#D4AF37] focus:border-[#D4AF37] outline-none transition-all"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#0070F4] focus:border-[#0070F4] outline-none transition-all"
               placeholder="/designs/template-name.png"
             />
           </div>
@@ -111,7 +111,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
                   name="photoX"
                   defaultValue={template?.photoPosition.x ?? 100}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0070F4] outline-none"
                 />
               </div>
               <div>
@@ -122,7 +122,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
                   name="photoY"
                   defaultValue={template?.photoPosition.y ?? 100}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0070F4] outline-none"
                 />
               </div>
               <div>
@@ -133,7 +133,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
                   name="photoWidth"
                   defaultValue={template?.photoPosition.width ?? 300}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0070F4] outline-none"
                 />
               </div>
               <div>
@@ -144,7 +144,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
                   name="photoHeight"
                   defaultValue={template?.photoPosition.height ?? 300}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0070F4] outline-none"
                 />
               </div>
             </div>
@@ -162,7 +162,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
                   name="nameX"
                   defaultValue={template?.namePosition.x ?? 250}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0070F4] outline-none"
                 />
               </div>
               <div>
@@ -173,7 +173,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
                   name="nameY"
                   defaultValue={template?.namePosition.y ?? 600}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0070F4] outline-none"
                 />
               </div>
               <div>
@@ -184,7 +184,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
                   name="fontSize"
                   defaultValue={template?.namePosition.fontSize ?? 24}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0070F4] outline-none"
                 />
               </div>
               <div>
@@ -195,7 +195,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
                   name="fontColor"
                   defaultValue={template?.namePosition.color ?? '#FFFFFF'}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0070F4] outline-none"
                   placeholder="#FFFFFF"
                 />
               </div>
@@ -207,7 +207,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
                 id="fontFamily"
                 name="fontFamily"
                 defaultValue={template?.namePosition.fontFamily ?? 'Poppins'}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0070F4] outline-none"
               />
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function TemplateEditor({ template, onSave, onCancel }: TemplateE
             </button>
             <button
               type="submit"
-              className="flex-1 gold-btn"
+              className="flex-1 primary-btn"
             >
               {isEditing ? 'Save Changes' : 'Create Template'}
             </button>

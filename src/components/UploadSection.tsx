@@ -50,7 +50,7 @@ export default function UploadSection({ onImageUpload }: UploadSectionProps) {
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
-        className="relative bg-white rounded-2xl p-10 sm:p-14 border-2 border-dashed border-gray-300 cursor-pointer transition-all duration-300 hover:border-[#D4AF37] hover:shadow-lg group"
+        className="relative bg-white rounded-2xl p-10 sm:p-14 border-2 border-dashed border-gray-300 cursor-pointer transition-all duration-300 hover:border-[#0070F4] hover:shadow-lg group"
         style={{
           background: 'linear-gradient(145deg, #FFFFFF 0%, #F8F9FA 100%)',
         }}
@@ -71,7 +71,7 @@ export default function UploadSection({ onImageUpload }: UploadSectionProps) {
           }}
         >
           <svg 
-            className="w-10 h-10 text-[#D4AF37] transition-transform duration-300 group-hover:scale-110" 
+            className="w-10 h-10 text-[#0070F4] transition-transform duration-300 group-hover:scale-110" 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -101,7 +101,7 @@ export default function UploadSection({ onImageUpload }: UploadSectionProps) {
 
         {/* Gold accent line on hover */}
         <div 
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-1 bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#B8960C] rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-1 bg-gradient-to-r from-[#4DA3FF] via-[#0070F4] to-[#001E36] rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
           style={{ width: '60%' }}
         />
       </div>

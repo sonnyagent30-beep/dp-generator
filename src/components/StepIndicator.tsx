@@ -23,7 +23,7 @@ export default function StepIndicator({ currentStep }: { currentStep: number }) 
               <div
                 className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all duration-300 shadow-sm ${
                   currentStep >= step.id
-                    ? 'bg-gradient-to-br from-[#E5C158] via-[#D4AF37] to-[#B8960C] text-white shadow-md'
+                    ? 'bg-gradient-to-br from-[#4DA3FF] via-[#0070F4] to-[#001E36] text-white shadow-md'
                     : 'bg-white text-gray-400 border-2 border-gray-200'
                 }`}
               >
@@ -47,7 +47,7 @@ export default function StepIndicator({ currentStep }: { currentStep: number }) 
               <div
                 className={`h-1 flex-1 mx-1 sm:mx-2 rounded-full transition-all duration-500 ${
                   currentStep > step.id 
-                    ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158]' 
+                    ? 'bg-gradient-to-r from-[#0070F4] to-[#4DA3FF]' 
                     : 'bg-gray-200'
                 }`}
               />

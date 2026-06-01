@@ -21,8 +21,8 @@ export default function DesignGallery({ selectedDesign, onSelectDesign }: Design
           onClick={() => handleDesignClick(design)}
           className={`relative bg-white rounded-2xl p-4 sm:p-5 border-2 transition-all duration-300 text-left group hover:shadow-xl ${
             selectedDesign === design.id
-              ? 'border-[#D4AF37] shadow-lg scale-[1.02]'
-              : 'border-gray-200 hover:border-[#D4AF37]/50 hover:scale-[1.01]'
+              ? 'border-[#0070F4] shadow-lg scale-[1.02]'
+              : 'border-gray-200 hover:border-[#0070F4]/50 hover:scale-[1.01]'
           }`}
           style={{ animationDelay: `${index * 100}ms` }}
         >
@@ -31,7 +31,7 @@ export default function DesignGallery({ selectedDesign, onSelectDesign }: Design
             className="relative aspect-square rounded-xl mb-4 overflow-hidden"
             style={{
               background: design.id.includes('anniversary') 
-                ? 'linear-gradient(135deg, #FFD700 0%, #B8860B 50%, #D4AF37 100%)' 
+                ? 'linear-gradient(135deg, #FFD700 0%, #B8860B 50%, #0070F4 100%)' 
                 : design.id.includes('romantic')
                 ? 'linear-gradient(135deg, #FF69B4 0%, #FF1493 50%, #FFB6C1 100%)'
                 : design.id.includes('classic')
@@ -72,14 +72,14 @@ export default function DesignGallery({ selectedDesign, onSelectDesign }: Design
           </div>
 
           {/* Design Name & Description */}
-          <h3 className="text-gray-800 font-semibold text-sm sm:text-base mb-1 group-hover:text-[#D4AF37] transition-colors">
+          <h3 className="text-gray-800 font-semibold text-sm sm:text-base mb-1 group-hover:text-[#0070F4] transition-colors">
             {design.name}
           </h3>
           <p className="text-gray-500 text-xs sm:text-sm leading-tight">{design.description}</p>
 
           {/* Selected Indicator */}
           {selectedDesign === design.id && (
-            <div className="absolute -top-3 -right-3 w-7 h-7 bg-gradient-to-br from-[#E5C158] to-[#D4AF37] rounded-full flex items-center justify-center shadow-md animate-scaleIn">
+            <div className="absolute -top-3 -right-3 w-7 h-7 bg-gradient-to-br from-[#4DA3FF] to-[#0070F4] rounded-full flex items-center justify-center shadow-md animate-scaleIn">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
               </svg>

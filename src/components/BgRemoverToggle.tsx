@@ -24,7 +24,7 @@ export default function BgRemoverToggle({ onToggle, isProcessing }: BgRemoverTog
         {/* Icon */}
         <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
           enabled 
-            ? 'bg-gradient-to-br from-[#E5C158] to-[#D4AF37] shadow-md' 
+            ? 'bg-gradient-to-br from-[#4DA3FF] to-[#0070F4] shadow-md' 
             : 'bg-gray-100'
         }`}>
           {enabled ? (
@@ -50,7 +50,7 @@ export default function BgRemoverToggle({ onToggle, isProcessing }: BgRemoverTog
           disabled={isProcessing}
           className={`relative w-14 h-8 rounded-full transition-all duration-300 ${
             enabled 
-              ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158]' 
+              ? 'bg-gradient-to-r from-[#0070F4] to-[#4DA3FF]' 
               : 'bg-gray-200'
           } ${isProcessing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
           aria-label="Toggle background removal"
@@ -61,7 +61,7 @@ export default function BgRemoverToggle({ onToggle, isProcessing }: BgRemoverTog
             }`}
           >
             <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-              enabled ? 'bg-[#D4AF37]' : 'bg-gray-400'
+              enabled ? 'bg-[#0070F4]' : 'bg-gray-400'
             }`} />
           </div>
         </button>
@@ -71,9 +71,9 @@ export default function BgRemoverToggle({ onToggle, isProcessing }: BgRemoverTog
       {isProcessing && (
         <div className="mt-5 pt-5 border-t border-gray-100 flex items-center gap-3">
           <div 
-            className="w-5 h-5 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin"
+            className="w-5 h-5 border-2 border-[#0070F4] border-t-transparent rounded-full animate-spin"
           />
-          <span className="text-[#D4AF37] text-sm font-medium">Processing background removal...</span>
+          <span className="text-[#0070F4] text-sm font-medium">Processing background removal...</span>
         </div>
       )}
     </div>
