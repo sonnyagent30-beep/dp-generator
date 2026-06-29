@@ -83,6 +83,7 @@ export default function Home() {
             </section>
           )}
 
+
           {/* Step 2: Design Selection */}
           {currentStep === 2 && (
             <section>
