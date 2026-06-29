@@ -1,0 +1,4 @@
+{
+  "version": "1.0.0",
+  "version_short": "1.0"
+}
