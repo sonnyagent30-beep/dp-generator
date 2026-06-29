@@ -1,26 +1,21 @@
 {
-  "name": "Dannion DP Generator",
+  "name": "dp-generator",
   "short_name": "DP Generator",
-  "description": "Create stunning profile pictures with custom designs, background removal, and Canvas API compositing.",
+  "description": "Generate stunning display pictures with Dannion Creative Hub",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFFFFF",
+  "background_color": "#ffffff",
   "theme_color": "#0070F4",
-  "orientation": "portrait",
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
-  ],
-  "categories": ["photography", "utilities"],
-  "lang": "en"
+  ]
 }
